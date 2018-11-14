@@ -40,7 +40,20 @@ $(document)
 			list.push({id: generateUUID(), name: $('input[name=ListItem]').val(), isComplete: false});
 			clearInput();
 			refreshList();
-		}	
+		}		
+		
+		//cross out item
+        $(document).on('click', 'input[name=done-todo]', function (event) {
+            $(this).parent().toggleClass('checked');
+            list.find(item => item.id === $(this).parent()[0].id).isComplete = $(this).parent().hasClass('checked');
+        });
+
+		//filters on-click event
+		$('#filters li a').click(function (item) {
+                const filterType = $(this).data('filter');
+                filtering = filterType;
+                refreshList();
+        });
 		
 		//update list
 		function refreshList(){
