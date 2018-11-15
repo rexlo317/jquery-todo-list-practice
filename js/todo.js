@@ -28,17 +28,12 @@ $(document)
 
         // code to be implemented
 		
-		//clear input field
-		function clearInput(){
-			$('input[name=ListItem]').val('');
-		}
-		
 		//add item
         $('#button').click(add);
 		
 		function add(){
 			list.push({id: generateUUID(), name: $('input[name=ListItem]').val(), isComplete: false});
-			clearInput();
+			$('input[name=ListItem]').val('');
 			refreshList();
 		}		
 		
@@ -65,8 +60,7 @@ $(document)
 
 		//filters on-click event
 		$('#filters li a').click(function (item) {
-                const filterType = $(this).data('filter');
-                filtering = filterType;
+                filtering = $(this).data('filter');
                 refreshList();
         });
 		
