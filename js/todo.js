@@ -1,11 +1,5 @@
 $(document)
     .ready(function () {
-	var list = [];
-	var filtering = "all";
-	const itemConstructor = item => `<li id=${item.id} class="${item.isComplete ? "checked" : ""}">
-									<input name="done-todo" ${item.isComplete ? 'checked' : ""} type="checkbox" class="done-todo" />
-									<span> ${item.name}</span> </li>`
-
         function generateUUID() {
             /*jshint bitwise:false */
             var i,
@@ -27,6 +21,8 @@ $(document)
         }
 
         // code to be implemented
+		var list = [];
+		var filtering = "all";
 		
 		//add item
         $('#button').click(add);
@@ -68,8 +64,9 @@ $(document)
 		function refreshList(){
 			var filterList = item => [{filterKey: "all", output: true}, {filterKey: "complete", output: item.isComplete}, {filterKey: "active", output: !item.isComplete}]
 										.find(item => item.filterKey == filtering).output;
-			var orderlist = list.filter(filterList).map(item => itemConstructor(item));
+			var orderlist = list.filter(filterList).map(item => `<li id=${item.id} class="${item.isComplete ? "checked" : ""}">
+									<input name="done-todo" ${item.isComplete ? 'checked' : ""} type="checkbox" class="done-todo" />
+									<span> ${item.name}</span> </li>`);
 			$('ol').html(orderlist);
 		}
-		
     });
